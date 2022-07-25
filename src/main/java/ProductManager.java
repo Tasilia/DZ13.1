@@ -18,9 +18,9 @@ public class ProductManager {
             if (matches(product, text)) {
                 tmp = Arrays.copyOf(result, result.length + 1);
                 tmp[tmp.length - 1] = product;
+                result = tmp;
             }
         }
-        result = tmp;
         return result;
     }
 

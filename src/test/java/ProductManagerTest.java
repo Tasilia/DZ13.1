@@ -6,6 +6,7 @@ public class ProductManagerTest {
     ProductManager manager = new ProductManager(repo);
     Product product = new Product(1, "Стол", 5000);
     Book book = new Book(2, "Книга", 1000, "Есенин");
+    Book book2 = new Book(4, "Книга", 1000, "Есенин");
     Smartphone smartphone = new Smartphone(3, "Телефон", 50000, "Samsung");
     @Test
     public void shouldAdd(){
@@ -17,12 +18,32 @@ public class ProductManagerTest {
         Assertions.assertArrayEquals(actual, expected);
     }
     @Test
-    public void shouldSearch(){
+    public void shouldSearchOne(){
         manager.add(product);
         manager.add(book);
         manager.add(smartphone);
         Product[] expected = {book};
         Product[] actual = manager.searchBy("Книга");
+        Assertions.assertArrayEquals(actual, expected);
+    }
+
+    @Test
+    public void shouldSearchTwo(){
+        manager.add(product);
+        manager.add(book);
+        manager.add(smartphone);
+        manager.add(book2);
+        Product[] expected = {book, book2};
+        Product[] actual = manager.searchBy("Книга");
+        Assertions.assertArrayEquals(actual, expected);
+    }
+
+    @Test
+    public void shouldSearchZero(){
+        manager.add(product);
+        manager.add(book);
+        Product[] expected = {};
+        Product[] actual = manager.searchBy("Телефон");
         Assertions.assertArrayEquals(actual, expected);
     }
 }
